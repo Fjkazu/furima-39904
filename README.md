@@ -15,7 +15,6 @@
 
 ### Association
 
-- has_many :sends
 - has_many :items
 - has_many :buys
 
@@ -31,12 +30,11 @@
 | area_id          | integer    | null: false                    |
 | how_many_day_id  | integer    | null: false                    |
 | price            | integer    | null: false                    |
-| user_id          | references | null: false, foreign_key: true |
+| user             | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one    :send
 - has_one    :buy
 
 ## buys テーブル
@@ -50,21 +48,20 @@
 
 - belongs_to :user
 - belongs_to :item
+- has_one    :shipping
 
-## sends テーブル
+## shippings テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | post_code     | integer    | null: false                    |
-| prefecture    | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
 | municipality  | string     | null: false                    |
 | address       | string     | null: false                    |
-| building      | text       |                                |
-| tel_number    | integer    | null: false                    |
-| item_id       | references | null: false, foreign_key: true |
-| user_id       | references | null: false, foreign_key: true |
+| building      | string     |                                |
+| tel_number    | string     | null: false                    |
+| buy           | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
-- belongs_to :item
+- belongs_to :buy
