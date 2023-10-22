@@ -6,7 +6,7 @@ function item (){
     const totalPrice = form.value;
     const taxPrice = Math.floor(totalPrice * 0.1);
     tax.innerHTML = taxPrice;
-    profit.innerHTML = (totalPrice - taxPrice);   
+    profit.innerHTML = Math.floor(totalPrice - taxPrice);   
   })
 };
 
