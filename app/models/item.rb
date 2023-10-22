@@ -22,7 +22,7 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   validates :image, :item_name, :overview, :category_id, :condition_id, :delivery_cost_id, :prefecture_id, :how_many_day_id, :price, presence: true
-  validates :price, numericality: {greater_than: 299,less_than: 10000000}
+  validates :price, numericality:{greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "は ¥300~9,999,999 の間で半角数字で指定してください" }
   validates :price, numericality: {only_integer: true, message: 'Half-width number'}
 
 

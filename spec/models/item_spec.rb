@@ -57,12 +57,12 @@ RSpec.describe Item, type: :model do
       it '価格が300円未満では登録できない' do
         @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than 299")
+        expect(@item.errors.full_messages).to include("Price は ¥300~9,999,999 の間で半角数字で指定してください")
       end
       it '価格が10,000,000円以上では登録できない' do
         @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than 10000000")
+        expect(@item.errors.full_messages).to include("Price は ¥300~9,999,999 の間で半角数字で指定してください")
       end
       it '価格が全角では登録できない' do
         @item.price = "５００"
@@ -72,7 +72,7 @@ RSpec.describe Item, type: :model do
       it '価格が英字では登録できない' do
         @item.price = 'abcd'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include("Price Half-width number")
       end
       it '画像が空では登録できない' do
         @item.image = nil
