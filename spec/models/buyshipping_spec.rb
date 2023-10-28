@@ -12,6 +12,10 @@ RSpec.describe BuyShipping, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@buyshipping).to be_valid
       end
+      it '建物名が空でも保存できること' do
+        @buyshipping.building = ""
+        expect(@buyshipping).to be_valid
+      end
     end
 
     context '内容に問題がある場合' do
@@ -26,7 +30,7 @@ RSpec.describe BuyShipping, type: :model do
         expect(@buyshipping.errors.full_messages).to include("Post code can't be blank")
       end
       it '都道府県が未選択だと保存できないこと' do
-        @buyshipping.prefecture_id = ""
+        @buyshipping.prefecture_id = 1
         @buyshipping.valid?
         expect(@buyshipping.errors.full_messages).to include("Prefecture 都道府県を選択してください")
       end
@@ -70,6 +74,16 @@ RSpec.describe BuyShipping, type: :model do
         @buyshipping.tel_number = "abcdefghijk"
         @buyshipping.valid?
         expect(@buyshipping.errors.full_messages).to include("Tel number is invalid")
+      end
+      it 'ユーザーが紐づいていないと保存できない' do
+        @buyshipping.user_id = nil
+        @buyshipping.valid?
+        expect(@buyshipping.errors.full_messages).to include("User can't be blank")
+      end
+      it 'アイテムが紐づいていないと保存できない' do
+        @buyshipping.item_id = nil
+        @buyshipping.valid?
+        expect(@buyshipping.errors.full_messages).to include("Item can't be blank")
       end
 
     end
