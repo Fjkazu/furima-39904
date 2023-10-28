@@ -24,6 +24,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+
   end
 
   def update
@@ -37,9 +38,7 @@ class ItemsController < ApplicationController
 
   def destroy
     item = Item.find(params[:id])
-    if current_user == item.user
-      item.destroy
-    end
+    item.destroy if current_user == item.user
     redirect_to root_path
   end
 
@@ -56,8 +55,7 @@ class ItemsController < ApplicationController
 
   def move_to_index
     item = Item.find(params[:id])
-    return if user_signed_in? && current_user.id == item.user_id
-
+    return if user_signed_in? && current_user.id == item.user_id && item.buy == nil
     redirect_to action: :index
   end
 end
