@@ -11,3 +11,4 @@ function item (){
 };
 
 window.addEventListener("turbo:load", item);
+window.addEventListener("turbo:render", item);
